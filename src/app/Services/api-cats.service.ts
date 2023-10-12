@@ -13,9 +13,13 @@ export class ApiCatsService {
 
   constructor(private http: HttpClient) {}
 
-  getCats(): Observable<Cat[]> {
-    const headers = new HttpHeaders().set('x-api-key', this.apiKey);
-    return this.http.get<Cat[]>(this.apiEndpoint, { headers });
+  getCats(page: number, pageSize: number): Observable<Cat[]> {
+    const url = `${this.apiEndpoint}?limit=${pageSize}&page=${page}`;
+    return this.http.get<Cat[]>(url, {
+      headers: {
+        'x-api-key': this.apiKey,
+      },
+    });
   }
 }
 

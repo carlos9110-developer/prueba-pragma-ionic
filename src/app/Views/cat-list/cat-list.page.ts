@@ -6,17 +6,25 @@ import { ViewModelCat } from 'src/app/ViewModels/ViewModelCat';
   templateUrl: './cat-list.page.html',
   styleUrls: ['./cat-list.page.scss'],
 })
-export class CatListPage implements OnInit {
+export class CatListPage  {
+
+  loadingText: string = "Cargando más razas de gatos...";
 
   constructor(public viewModelCat: ViewModelCat) {}
 
-  ngOnInit() {
-    console.log("datos", this.viewModelCat.getCats());
+  ionViewDidEnter() {
+    this.viewModelCat.loadCats();
+  }
+
+  loadMore(event: any) {
+    setTimeout(() => {
+      this.viewModelCat.loadMoreCats();
+      event.target.complete();
+    }, 2000);
   }
 
   getUrlImage(referenceImageId: string)
   {
-    console.log("image", referenceImageId);
     return `https://cdn2.thecatapi.com/images/${referenceImageId}.jpg`;
   }
 

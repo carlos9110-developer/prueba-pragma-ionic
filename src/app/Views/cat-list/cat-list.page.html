@@ -9,7 +9,7 @@
     <ion-card-content>
       <ion-card-title>{{ cat.name }}</ion-card-title>
     </ion-card-content>
-    <img [src]="getUrlImage(cat.reference_image_id)" />
+    <img [alt]="cat.name" [src]="getUrlImage(cat.reference_image_id)" />
     <ion-card-content class="info-container">
       <div class="left-info">
         <div class="title">País de Origen:</div>
@@ -21,4 +21,7 @@
       </div>
     </ion-card-content>
   </ion-card>
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content [loadingText]="loadingText"></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

@@ -7,13 +7,25 @@ import { Cat } from '../Interfaces/Cat';
 })
 export class ViewModelCat {
   cats: Cat[] = [];
+  currentPage: number = 1;
+  pageSize: number = 12;
 
-  constructor(private apiCatsService: ApiCatsService) {}
+  constructor(private catService: ApiCatsService) {}
 
-  getCats() {
-    this.apiCatsService.getCats().subscribe((data) => {
+  loadCats() {
+    this.catService.getCats(this.currentPage, this.pageSize).subscribe((data) => {
       this.cats = data;
-      this.cats =  this.cats.filter((cat) => cat.reference_image_id);
+      this.cats = this.cats.filter((cat) => cat.reference_image_id);
     });
   }
+
+  loadMoreCats() {
+    this.currentPage++;
+    this.catService.getCats(this.currentPage, this.pageSize).subscribe((data) => {
+      this.cats = this.cats.concat(data);
+      this.cats = this.cats.filter((cat) => cat.reference_image_id);
+    });
+  }
+
+
 }
