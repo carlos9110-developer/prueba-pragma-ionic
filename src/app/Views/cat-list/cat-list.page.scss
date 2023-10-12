@@ -1,0 +1,23 @@
+.info-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-info,
+.right-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.title{
+  font-weight: bold;
+}
+
+ion-title{
+  text-align: center;
+}
+
+ion-card {
+  margin-top: 20px;
+}
+
